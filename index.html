@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>I am psychic. Try me!</title>
+</head>
+<body>
+
+	<div id="game">
+		<!-- This is the message that displays at startup. -->
+		<p>Press any letter and try to guess what I am thinking</p>
+	</div>
+
+	<script type="text/javascript">
+		
+		var choices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+		
+
+		var wins = 0;
+		var losses = 0;
+		var guessesLeft = 10;
+		var guessesSoFar = "";
+		var lastComputerGuess = "nothing";
+		var computerGuess = choices[Math.floor(Math.random() * choices.length)];
+
+		document.onkeyup = function(event){
+			
+			var userGuess = event.key.toLowerCase();
+
+
+				guessesSoFar += userGuess;
+
+					for(var i = userGuess; i !== choices; i++;){
+
+						alert("it works i = " + i + "choices = " + choices);
+					};
+
+
+
+				if(userGuess == computerGuess){
+					alert("You Won!!!"); 
+					wins++;
+					resetGame();
+
+				} else {
+					alert("you lost!");
+					guessesLeft --;
+				}
+
+				if(guessesLeft == 0){
+
+					losses++;
+					resetGame();
+
+					// computerGuess = choices[Math.floor(Math.random() * choices.length)];
+					// guessesLeft = 10 ;
+					// guessesSoFar = "";
+				}
+				
+				
+			var html = "<p> You chose: " + guessesSoFar + "</p>" +
+			"<p> The Computer chose " + lastComputerGuess + " on the last game.</p>" +
+			"<p> Wins: " + wins + "</p>" +
+			"<p> losses: " + losses + "</p>" +
+			"<p> Guesses Left: " + guessesLeft + "</p>";
+			
+			document.querySelector("#game").innerHTML = html;
+
+
+
+		};
+
+		function resetGame(){
+			lastComputerGuess = computerGuess;
+			computerGuess = choices[Math.floor(Math.random() * choices.length)];
+			guessesLeft = 10 ;
+			guessesSoFar = "";
+
+		};
+
+
+
+
+	</script>
+
+</body>
+</html>
